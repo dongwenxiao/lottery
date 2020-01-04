@@ -107,6 +107,7 @@ function initAll() {
 
 
       let useIndex = mode;
+      if(useIndex == 'x') useIndex = 0;
       setPrizeData(useIndex, curLucks ? curLucks.length : 0, true);
     }
   });
@@ -806,7 +807,7 @@ function random(num) {
  */
 function changeCard(cardIndex, user) {
   let card = threeDCards[cardIndex].element;
-
+  if(!user) return;
   card.innerHTML = `<div class="company">${user[1].split('-')[0]}</div><div class="details"><img src="${user[2]}" /></div><div class="name">${
     user[1].split('-')[1]
   }</div>`;
