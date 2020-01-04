@@ -526,3 +526,7 @@ button:active {
     height: 100px;
     /* background: blue; */
 }
+
+#prize-count-0{
+    display: none;
+}

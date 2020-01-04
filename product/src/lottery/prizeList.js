@@ -87,7 +87,6 @@ class DanMu {
   }
 }
 
-
 class Qipao {
   constructor(option) {
     if (typeof option !== "object") {
@@ -153,7 +152,7 @@ let addQipao = (() => {
 })();
 
 // 奖项设置
-function setPrizes(pri,data=1) {
+function setPrizes(pri, data = 1) {
   prizes = pri;
   defaultType = prizes[0]["type"];
   lasetPrizeIndex = pri.length - data;
@@ -167,15 +166,16 @@ function showPrizeList(currentPrizeIndex) {
   }
   // let index = currentPrize.type==3?currentPrize.type-1:(currentPrize.type==4?currentPrize.type-2:currentPrize.type)
   let index = currentPrize.type > 2 ? currentPrize.type - 1 : currentPrize.type;
-  if(index == 0) index = '特';
-  index += '等奖'
-  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${index}</label><label id="prizeText" class="prize-shine">${
-    currentPrize["title"]
-  }</label>`
+
+  if (index == 1) index = "一";
+  if (index == 2) index = "二";
+  if (index == 3) index = "三";
+  if (index == 0) index = "特";
+
+  index += "等奖";
+  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" xx='xxxxxxx' class="prize-shine">嘻嘻嘻嘻嘻${index}</label><label id="prizeText" class="prize-shine">${currentPrize["title"]}</label>`;
   // if(currentPrize.type!=3){
-    htmlCode+=`  <label id="prizeLeft" style="display:none;" class="prize-shine">${
-      currentPrize["count"]
-    }</label> </div><ul class="prize-list" id='priList'>`;
+  htmlCode += `  <label id="prizeLeft" style="display:none;" class="prize-shine">${currentPrize["count"]}</label> </div><ul class="prize-list" id='priList'>`;
   // }
 
   prizes.forEach(item => {
@@ -183,13 +183,20 @@ function showPrizeList(currentPrizeIndex) {
     // if (item.type === defaultType) {
     //   return true;
     // }
-    htmlCode += `<li id="prize-item-${item.type}" style="display:none" class="prize-item ${item.type == currentPrize.type ? "shine" : ""}">`;
+    htmlCode += `<li id="prize-item-${
+      item.type
+      }" style="display:none" class="prize-item ${
+    // }" class="prize-item ${
+      item.type == currentPrize.type ? "shine" : ""}">`;
     // if(item.type==2){
     //   htmlCode +=  `<span class="add" id='add2'>+</span>`
     // }
     // let iii = item.type==3||item.type==4? item.type-1:item.type
-    let iii = item.type > 2 ? item.type -1 : item.type;
-    if(iii == 0) iii = '特'
+    let iii = item.type > 2 ? item.type - 1 : item.type;
+    if (iii == 1) iii = "一";
+    if (iii == 2) iii = "二";
+    if (iii == 3) iii = "三";
+    if (iii == 0) iii = "特";
     htmlCode += `<div class="prize-img">
         <img src="${item.img}" alt="${item.title}">
       </div>
@@ -197,14 +204,18 @@ function showPrizeList(currentPrizeIndex) {
       <h5 class="prize-title">${iii}等奖 ${item.title}</h5>
     `;
     // if(item.type!==4){
-      htmlCode+=`<div class="prize-count">
+    htmlCode += `<div class="prize-count">
         <div class="progress">
-          <div id="prize-bar-${item.type}" class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 100%;"></div>
+          <div id="prize-bar-${
+            item.type
+          }" class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 100%;"></div>
         </div>
-        <div id="prize-count-${item.type}" class="prize-count-left">${item.count + "/" + item.count}</div>
+        <div id="prize-count-${
+          item.type
+        }" class="prize-count-left">${item.count + "/" + item.count}</div>
       </div>`;
     // }
-    htmlCode+=`</div>
+    htmlCode += `</div>
   </li>`;
   });
   htmlCode += `</ul>`;
@@ -257,7 +268,19 @@ let setPrizeData = (function() {
       lastBox.classList.remove("shine");
       lastBox.classList.add("done");
       elements.box && elements.box.classList.add("shine");
-      prizeElement.prizeType.textContent = currentPrize.type==4||currentPrize.type==3? 2 + "等奖": currentPrize.type+'等奖';
+
+      let result =
+        currentPrize.type == 4 || currentPrize.type == 3
+          ? 2 + "等奖"
+          : currentPrize.type + "等奖";
+
+      if(currentPrize.type == 0) result = '特等奖';
+      if(currentPrize.type == 1) result = '一等奖';
+      if(currentPrize.type == 2) result = '二等奖';
+      if(currentPrize.type == 3) result = '二等奖';
+      if(currentPrize.type == 4) result = '三等奖';
+      prizeElement.prizeType.textContent = result;
+
       prizeElement.prizeText.textContent = currentPrize.title;
 
       lasetPrizeIndex = currentPrizeIndex;
