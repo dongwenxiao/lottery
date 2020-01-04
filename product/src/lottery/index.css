@@ -31,11 +31,6 @@ a {
     margin-left: 15vh;
 }
 
-#lotteryBar button{
-    float: left;
-    margin-left: 0;
-}
-
 .canvas-box {
     position: fixed;
     left: 0;
@@ -194,10 +189,6 @@ button:active {
     margin: 0;
     padding: 0;
     list-style: none;
-}
-
-.prize-list #add2{
-    display: none;
 }
 
 .prize-item {
@@ -511,18 +502,4 @@ button:active {
     to {
         transform: rotate(360deg);
     }
-}
-
-.control-box{
-    width: 150px;
-}
-.control-box input{
-    width: 100px;
-    height: 30px;
-}
-
-.button-show{
-    width: 100px;
-    height: 100px;
-    /* background: blue; */
 }

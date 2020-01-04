@@ -63,13 +63,8 @@ initAll();
  * 初始化所有DOM
  */
 function initAll() {
-
-  let mode = window.location.search.split("?")[1].split("=")[1]
-  if(!mode) {alert('URL参数错误'); return;}
-
-
   window.AJAX({
-    url: "/getTempData?mode=" + mode,
+    url: "/getTempData",
     success(data) {
       console.log('data',data);
       // 获取基础数据
@@ -95,7 +90,6 @@ function initAll() {
         ) {
           continue;
         }
-        // basicData.prizes
         currentPrizeIndex = prizeIndex;
         currentPrize = basicData.prizes[currentPrizeIndex];
         break;
@@ -103,12 +97,7 @@ function initAll() {
       // 展示奖品列表
       showPrizeList(currentPrizeIndex);
       let curLucks = basicData.luckyUsers[currentPrize.type];
-
-
-
-      let useIndex = mode;
-      if(useIndex == 'x') useIndex = 0;
-      setPrizeData(useIndex, curLucks ? curLucks.length : 0, true);
+      setPrizeData(currentPrizeIndex, curLucks ? curLucks.length : 0, true);
     }
   });
 
@@ -122,12 +111,7 @@ function initAll() {
       shineCard();
     }
   });
-
-  // initControlBtn();
-  
 }
-
-
 
 // 初始化卡片
 function initCards() {
@@ -636,7 +620,7 @@ function selectCard(duration = 600) {
         {
           x: tag * width * Resolution,
           y: 50 * Resolution,
-          z: 2400
+          z: 2200
         },
         Math.random() * duration + duration
       )
@@ -807,7 +791,7 @@ function random(num) {
  */
 function changeCard(cardIndex, user) {
   let card = threeDCards[cardIndex].element;
-  if(!user) return;
+
   card.innerHTML = `<div class="company">${user[1].split('-')[0]}</div><div class="details"><img src="${user[2]}" /></div><div class="name">${
     user[1].split('-')[1]
   }</div>`;

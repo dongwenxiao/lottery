@@ -165,15 +165,7 @@ function showPrizeList(currentPrizeIndex) {
   if (currentPrize.type === defaultType) {
     currentPrize.count === "不限制";
   }
-  let name = currentPrize.type==3
-    ?currentPrize.type-1
-    :(currentPrize.type==4?currentPrize.type-2:currentPrize.type);
-    name += '等奖';
-
-    if(currentPrize.title == '特别奖') name = '';
-
-console.log(1111111111111,currentPrize)
-  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${name}</label><label id="prizeText" class="prize-shine">${
+  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.type==3?currentPrize.type-1:(currentPrize.type==4?currentPrize.type-2:currentPrize.type)}等奖</label><label id="prizeText" class="prize-shine">${
     currentPrize["title"]
   }</label>`
   // if(currentPrize.type!=3){
@@ -184,9 +176,9 @@ console.log(1111111111111,currentPrize)
 
   prizes.forEach(item => {
     console.log('item',item);
-    // if (item.type === defaultType) {
-    //   return true;
-    // }
+    if (item.type === defaultType) {
+      return true;
+    }
     htmlCode += `<li id="prize-item-${item.type}" class="prize-item ${item.type == currentPrize.type ? "shine" : ""}">`;
     if(item.type==2){
       htmlCode +=  `<span class="add" id='add2'>+</span>`
@@ -221,7 +213,6 @@ function resetPrize(currentPrizeIndex) {
 
 let setPrizeData = (function() {
   return function(currentPrizeIndex, count, isInit) {
-    // alert(currentPrizeIndex)
     let currentPrize = prizes[currentPrizeIndex],
       type = currentPrize.type,
       elements = prizeElement[type],
@@ -253,38 +244,18 @@ let setPrizeData = (function() {
       }
     }
 
-    // if (lasetPrizeIndex !== currentPrizeIndex) {
-    //   let lastPrize = prizes[lasetPrizeIndex],
-    //     lastBox = document.querySelector(`#prize-item-${lastPrize.type}`);
-    //   lastBox.classList.remove("shine");
-    //   lastBox.classList.add("done");
-    //   elements.box && elements.box.classList.add("shine");
-    //   prizeElement.prizeType.textContent = currentPrize.type==4||currentPrize.type==3? 2 + "等奖": currentPrize.type+'等奖';
-    //   prizeElement.prizeText.textContent = currentPrize.title;
+    if (lasetPrizeIndex !== currentPrizeIndex) {
+      let lastPrize = prizes[lasetPrizeIndex],
+        lastBox = document.querySelector(`#prize-item-${lastPrize.type}`);
+      lastBox.classList.remove("shine");
+      lastBox.classList.add("done");
+      elements.box && elements.box.classList.add("shine");
+      prizeElement.prizeType.textContent = currentPrize.type==4||currentPrize.type==3? 2 + "等奖": currentPrize.type+'等奖';
+      prizeElement.prizeText.textContent = currentPrize.title;
 
-    //   lasetPrizeIndex = currentPrizeIndex;
-    // }
+      lasetPrizeIndex = currentPrizeIndex;
+    }
 
-    // dongwenxiao add
-    if (currentPrizeIndex === 1) {
-      prizeElement.prizeType.textContent = "一等奖";
-      prizeElement.prizeText.textContent = " ";
-      prizeElement.prizeLeft.textContent = "1";
-      return;
-    }
-    if (currentPrizeIndex === 21 || currentPrizeIndex === 22) {
-      prizeElement.prizeType.textContent = "二等奖";
-      prizeElement.prizeText.textContent = " ";
-      prizeElement.prizeLeft.textContent = "5";
-      return;
-    }
-    if (currentPrizeIndex === "x") {
-      prizeElement.prizeType.textContent = "特等奖";
-      prizeElement.prizeText.textContent = " ";
-      prizeElement.prizeLeft.textContent = "1";
-      return;
-    }
-/* 
     if (currentPrizeIndex === 0) {
       prizeElement.prizeType.textContent = "特别奖";
       prizeElement.prizeText.textContent = " ";
@@ -297,7 +268,7 @@ let setPrizeData = (function() {
       prizeElement.prizeText.textContent = " ";
       prizeElement.prizeLeft.textContent = "28";
       return;
-    } */
+    }
 
     count = totalCount - count;
     let percent = (count / totalCount).toFixed(2);
