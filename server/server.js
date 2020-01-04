@@ -65,15 +65,6 @@ app.post("*", (req, res, next) => {
 
 // 获取之前设置的数据
 router.post("/getTempData", (req, res, next) => {
-  
-  let mode = req.query.mode
-  let cfg = require("./config");
-
-  if(mode === '21') cfg = require("./config_21");
-  if(mode === '22') cfg = require("./config_22");
-  if(mode === '1') cfg = require("./config_1");
-  if(mode === 'x') cfg = require("./config_x");
-
   getLeftUsers(); // 已经抽取的用户
   res.json({
     cfgData: cfg,
