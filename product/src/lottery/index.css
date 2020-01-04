@@ -503,3 +503,8 @@ button:active {
         transform: rotate(360deg);
     }
 }
+
+#lotteryBar button{
+    margin-left: 0;
+    float: left;
+}

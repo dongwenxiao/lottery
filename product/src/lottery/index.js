@@ -369,10 +369,18 @@ function bindEvent() {
   window.addEventListener("resize", onWindowResize, false);
 }
 
+let flagShow = true;
+
 // 键盘事件
 function bindKeydownEvent() {
   document.onkeydown = function(event) {
     switch (event.keyCode) {
+      case 83: // s 是否显示按钮
+        if (flagShow) window.showAll();
+        else window.hideAll();
+        flagShow = !flagShow;
+        break;
+
       case 81: // q 抽奖
         if (isStart) {
           addQipao("抽慢一点点～～");

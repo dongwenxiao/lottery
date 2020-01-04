@@ -165,38 +165,45 @@ function showPrizeList(currentPrizeIndex) {
   if (currentPrize.type === defaultType) {
     currentPrize.count === "不限制";
   }
-  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${currentPrize.type==3?currentPrize.type-1:(currentPrize.type==4?currentPrize.type-2:currentPrize.type)}等奖</label><label id="prizeText" class="prize-shine">${
+  // let index = currentPrize.type==3?currentPrize.type-1:(currentPrize.type==4?currentPrize.type-2:currentPrize.type)
+  let index = currentPrize.type > 2 ? currentPrize.type - 1 : currentPrize.type;
+  if(index == 0) index = '特';
+  index += '等奖'
+  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" class="prize-shine">${index}</label><label id="prizeText" class="prize-shine">${
     currentPrize["title"]
   }</label>`
   // if(currentPrize.type!=3){
-    htmlCode+=`，剩余<label id="prizeLeft" class="prize-shine">${
+    htmlCode+=`  <label id="prizeLeft" style="display:none;" class="prize-shine">${
       currentPrize["count"]
-    }</label>个</div><ul class="prize-list" id='priList'>`;
+    }</label> </div><ul class="prize-list" id='priList'>`;
   // }
 
   prizes.forEach(item => {
-    console.log('item',item);
-    if (item.type === defaultType) {
-      return true;
-    }
+    // console.log('item',item);
+    // if (item.type === defaultType) {
+    //   return true;
+    // }
     htmlCode += `<li id="prize-item-${item.type}" class="prize-item ${item.type == currentPrize.type ? "shine" : ""}">`;
-    if(item.type==2){
-      htmlCode +=  `<span class="add" id='add2'>+</span>`
-    }
+    // if(item.type==2){
+    //   htmlCode +=  `<span class="add" id='add2'>+</span>`
+    // }
+    // let iii = item.type==3||item.type==4? item.type-1:item.type
+    let iii = item.type > 2 ? item.type -1 : item.type;
+    if(iii == 0) iii = '特'
     htmlCode += `<div class="prize-img">
         <img src="${item.img}" alt="${item.title}">
       </div>
       <div class="prize-text">
-      <h5 class="prize-title">${item.type==3||item.type==4? item.type-1:item.type}等奖 ${item.title}</h5>
+      <h5 class="prize-title">${iii}等奖 ${item.title}</h5>
     `;
-    if(item.type!==4){
+    // if(item.type!==4){
       htmlCode+=`<div class="prize-count">
         <div class="progress">
           <div id="prize-bar-${item.type}" class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 100%;"></div>
         </div>
         <div id="prize-count-${item.type}" class="prize-count-left">${item.count + "/" + item.count}</div>
       </div>`;
-    }
+    // }
     htmlCode+=`</div>
   </li>`;
   });
@@ -256,19 +263,19 @@ let setPrizeData = (function() {
       lasetPrizeIndex = currentPrizeIndex;
     }
 
-    if (currentPrizeIndex === 0) {
-      prizeElement.prizeType.textContent = "特别奖";
-      prizeElement.prizeText.textContent = " ";
-      prizeElement.prizeLeft.textContent = "不限制";
-      return;
-    }
+    // if (currentPrizeIndex === 0) {
+    //   prizeElement.prizeType.textContent = "特别奖";
+    //   prizeElement.prizeText.textContent = " ";
+    //   prizeElement.prizeLeft.textContent = "不限制";
+    //   return;
+    // }
     // 三等奖
-    if (currentPrizeIndex === 4) {
-      prizeElement.prizeType.textContent = "三等奖";
-      prizeElement.prizeText.textContent = " ";
-      prizeElement.prizeLeft.textContent = "28";
-      return;
-    }
+    // if (currentPrizeIndex === 4) {
+    //   prizeElement.prizeType.textContent = "三等奖";
+    //   prizeElement.prizeText.textContent = " ";
+    //   prizeElement.prizeLeft.textContent = "28";
+    //   return;
+    // }
 
     count = totalCount - count;
     let percent = (count / totalCount).toFixed(2);

@@ -33,11 +33,11 @@
     <div id="menu">
       <button id="enter">进入抽奖</button>
       <div id="lotteryBar" class="none">
-        <button id="lottery">抽奖</button>
-        <button id="stop">停</button>
-        <button id="reLottery">重新抽奖</button>
-        <button id="save">导出抽奖结果</button>
-        <button id="reset" style="margin-left: 40px;">重置</button>
+        <button id="lottery">开始抽奖</button>
+        <button id="stop">停止</button>
+        <button id="reLottery" style="display:none">重新抽奖</button>
+        <button id="save" style="display:none">导出抽奖结果</button>
+        <button id="reset" style="margin-left: 40px;display:none">重置</button>
       </div>
     </div>
 
@@ -45,3 +45,23 @@
     <div class="show" id="show"></div>
   </body>
 </html>
+<script>
+  function showAll() {
+    showBox(document.querySelector("#reLottery"));
+    showBox(document.querySelector("#save"));
+    showBox(document.querySelector("#reset"));
+  }
+
+  function hideAll() {
+    hideBox(document.querySelector("#reLottery"));
+    hideBox(document.querySelector("#save"));
+    hideBox(document.querySelector("#reset"));
+  }
+
+  function showBox(dom) {
+    dom.style.removeProperty("display");
+  }
+  function hideBox(dom) {
+    dom.style.display = "none";
+  }
+</script>
