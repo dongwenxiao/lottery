@@ -173,7 +173,7 @@ function showPrizeList(currentPrizeIndex) {
   if (index == 0) index = "特";
 
   index += "等奖";
-  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" xx='xxxxxxx' class="prize-shine">嘻嘻嘻嘻嘻${index}</label><label id="prizeText" class="prize-shine">${currentPrize["title"]}</label>`;
+  let htmlCode = `<div class="prize-mess">正在抽取<label id="prizeType" xx='xxxxxxx' class="prize-shine">${index}</label><label id="prizeText" class="prize-shine">${currentPrize["title"]}</label>`;
   // if(currentPrize.type!=3){
   htmlCode += `  <label id="prizeLeft" style="display:none;" class="prize-shine">${currentPrize["count"]}</label> </div><ul class="prize-list" id='priList'>`;
   // }
