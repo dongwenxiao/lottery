@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>年会抽奖</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <!-- <link rel="stylesheet" href="./index.css"> -->
+  </head>
+
+  <body>
+    <script src="./lib/three.min.js"></script>
+    <script src="./lib/tween.min.js"></script>
+    <script src="./lib/TrackballControls.js"></script>
+    <script src="./lib/CSS3DRenderer.js"></script>
+    <script src="./lib/ajax.js"></script>
+
+    <div class="canvas-box">
+      <canvas id="canvas">你的浏览器不支持canvas</canvas>
+    </div>
+
+    <div class="music">
+      <audio id="music" src="./data/music.mp3" class="music-item" loop></audio>
+      <div id="musicBox" class="music-box" title="播放/暂停背景音乐">Music</div>
+      <div id="button_show" class="button-show"></div>
+      <!-- <div class="control-box">
+        <input id="chou_21" value="抽二等奖-1" type="button"></input>
+        <input id="chou_22" value="抽二等奖-2" type="button"></input>
+        <input id="chou_1" value="抽一等奖" type="button"></input>
+        <input id="chou_0" value="抽特等奖" type="button"></input>
+      </div> -->
+    </div>
+
+    <div id="prizeBar"></div>
+
+    <div id="container"></div>
+
+    <div id="menu">
+      <button id="enter">进入抽奖</button>
+      <div id="lotteryBar" class="none">
+        <button id="lottery">开始抽奖</button>
+        <button id="stop">停止</button>
+        <button id="reLottery">重新抽奖</button>
+        <button id="save">导出抽奖结果</button>
+        <button id="reset" style="margin-left: 40px;">重置</button>
+      </div>
+    </div>
+
+    <div class="qipao-container"></div>
+    <div class="show" id="show"></div>
+  </body>
+</html>
+<script>
+
+// function initControlBtn(){
+
+//   let box_21 = document.querySelector("#prize-item-3")
+//   let box_21 = document.querySelector("#prize-item-3")
+//   let box_21 = document.querySelector("#prize-item-3")
+
+
+//   // 二等奖 1点击
+//   document.querySelector("#chou_21").onclick = () => {
+//     showBox(box_21)
+//   }
+// }
+
+
+window.onload = function(){
+  // initControlBtn()
+
+  let flag = true
+
+  if(flag) hideAll()
+  
+  document.querySelector("#button_show").onclick = () => {
+
+      if(flag) showAll()
+      else hideAll()
+
+      flag = !flag
+  }
+  
+}
+
+function showAll() {
+  showBox(document.querySelector("#reLottery"));
+    showBox(document.querySelector("#save"));
+    showBox(document.querySelector("#reset"));
+}
+
+function hideAll() {
+  hideBox(document.querySelector("#reLottery"));
+  hideBox(document.querySelector("#save"));
+  hideBox(document.querySelector("#reset"));
+}
+
+function showBox (dom) {
+  dom.style.removeProperty('display')
+}
+function hideBox (dom){
+  dom.style.display = 'none'
+}
+</script>
