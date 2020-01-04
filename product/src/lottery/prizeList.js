@@ -183,7 +183,7 @@ function showPrizeList(currentPrizeIndex) {
     // if (item.type === defaultType) {
     //   return true;
     // }
-    htmlCode += `<li id="prize-item-${item.type}" class="prize-item ${item.type == currentPrize.type ? "shine" : ""}">`;
+    htmlCode += `<li id="prize-item-${item.type}" style="display:none" class="prize-item ${item.type == currentPrize.type ? "shine" : ""}">`;
     // if(item.type==2){
     //   htmlCode +=  `<span class="add" id='add2'>+</span>`
     // }

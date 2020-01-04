@@ -32,7 +32,7 @@ const prizes = [
   },
   {
     type: 4,
-    count: 10,
+    count: 30,
     title: " ",
     img: "../img/three.png"
   },

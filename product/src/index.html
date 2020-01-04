@@ -24,6 +24,7 @@
     <div class="music">
       <audio id="music" src="./data/music.mp3" class="music-item" loop></audio>
       <div id="musicBox" class="music-box" title="播放/暂停背景音乐">Music</div>
+      <div id="button_show" class="button-show"></div>
     </div>
 
     <div id="prizeBar"></div>
@@ -46,22 +47,58 @@
   </body>
 </html>
 <script>
-  function showAll() {
-    showBox(document.querySelector("#reLottery"));
+
+// function initControlBtn(){
+
+//   let box_21 = document.querySelector("#prize-item-3")
+//   let box_21 = document.querySelector("#prize-item-3")
+//   let box_21 = document.querySelector("#prize-item-3")
+
+
+//   // 二等奖 1点击
+//   document.querySelector("#chou_21").onclick = () => {
+//     showBox(box_21)
+//   }
+// }
+
+
+window.onload = function(){
+
+  // 按钮显示隐藏
+  let flag = true
+  if(flag) hideAll()
+  document.querySelector("#button_show").onclick = () => {
+      if(flag) showAll()
+      else hideAll()
+      flag = !flag
+  }
+
+  // 显示当前奖项
+  setInterval(function(){
+    document.querySelectorAll('.prize-item').forEach(dom => {
+      hideBox(dom)
+    })
+    showBox(document.querySelector('.prize-item.shine'));
+  }, 1000)
+  
+}
+
+function showAll() {
+  showBox(document.querySelector("#reLottery"));
     showBox(document.querySelector("#save"));
     showBox(document.querySelector("#reset"));
-  }
+}
 
-  function hideAll() {
-    hideBox(document.querySelector("#reLottery"));
-    hideBox(document.querySelector("#save"));
-    hideBox(document.querySelector("#reset"));
-  }
+function hideAll() {
+  hideBox(document.querySelector("#reLottery"));
+  hideBox(document.querySelector("#save"));
+  hideBox(document.querySelector("#reset"));
+}
 
-  function showBox(dom) {
-    dom.style.removeProperty("display");
-  }
-  function hideBox(dom) {
-    dom.style.display = "none";
-  }
+function showBox (dom) {
+  dom.style.removeProperty('display')
+}
+function hideBox (dom){
+  dom.style.display = 'none'
+}
 </script>
